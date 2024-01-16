@@ -30,4 +30,7 @@ The MoNuSeg (Multi-Organ Nucleus Segmentation) Challenge is a scientific competi
       <li><code>Average Recall: 0.7621</code></li>
       <li><code>Average F1 Score: 0.7650</code></li>
   </ul>
+  <h2>Conclusion</h2>
+  <p>The evaluation results showcase the effectiveness of the U-Net model in image segmentation tasks. The balanced performance across precision, recall, and IoU underscores the model's capability in identifying and delineating relevant segments accurately, making it a robust tool for image segmentation applications, particularly in medical imaging.</p>
+
 </div>
