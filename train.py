@@ -11,6 +11,23 @@ import json
 import matplotlib.pyplot as plt
 from torchvision import transforms
 import albumentations as augment
+from torch.nn.functional import pad
+
+def my_collate_fn(batch):
+    """ Custom collate function for handling images of different sizes. """
+    
+    # Find the largest image size in the batch
+    max_size = tuple(max(s) for s in zip(*[img.shape for img, mask in batch]))
+    
+    # Pad images and masks to the max size
+    batch = [(pad(img, (0, max_size[2] - img.shape[2], 0, max_size[1] - img.shape[1])), 
+              pad(mask, (0, max_size[2] - mask.shape[2], 0, max_size[1] - mask.shape[1]))) for img, mask in batch]
+    
+    # Stack all
+    imgs = torch.stack([item[0] for item in batch])
+    masks = torch.stack([item[1] for item in batch])
+    
+    return imgs, masks
 
 # Set device for training
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -63,9 +80,9 @@ with open('val_images.json', 'w') as f:
 with open('test_images.json', 'w') as f:
     json.dump(test_image_paths, f)
     
-train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True)
-val_loader = DataLoader(val_dataset, batch_size=4, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=4, shuffle=True)
+train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, collate_fn=my_collate_fn)
+val_loader = DataLoader(val_dataset, batch_size=4, shuffle=True, collate_fn=my_collate_fn)
+test_loader = DataLoader(test_dataset, batch_size=4, shuffle=True, collate_fn=my_collate_fn)
 
 # Model, Loss function, Optimizer
 model = UNet(n_channels=3, n_classes=1).to(device)
