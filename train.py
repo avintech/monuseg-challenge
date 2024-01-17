@@ -14,19 +14,11 @@ import albumentations as augment
 from torch.nn.functional import pad
 
 def my_collate_fn(batch):
-    """ Custom collate function for handling images of different sizes. """
-    
-    # Find the largest image size in the batch
     max_size = tuple(max(s) for s in zip(*[img.shape for img, mask in batch]))
-    
-    # Pad images and masks to the max size
     batch = [(pad(img, (0, max_size[2] - img.shape[2], 0, max_size[1] - img.shape[1])), 
               pad(mask, (0, max_size[2] - mask.shape[2], 0, max_size[1] - mask.shape[1]))) for img, mask in batch]
-    
-    # Stack all
     imgs = torch.stack([item[0] for item in batch])
     masks = torch.stack([item[1] for item in batch])
-    
     return imgs, masks
 
 # Set device for training
