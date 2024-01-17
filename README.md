@@ -18,17 +18,29 @@ The MoNuSeg (Multi-Organ Nucleus Segmentation) Challenge is a scientific competi
   <img src="https://github.com/avintech/monuseg-challenge/assets/64296499/e7d14708-2175-43a6-816e-359c67af72e6">
 </div>
 <div>
-  <h2>Training Phase</h2>
+ <h1>Training Overview</h1>
+<p>The training process covered 25 epochs, monitoring the model's performance through Loss and Intersection over Union (IoU) metrics for both training and validation datasets. The journey from the initial to the final epoch highlights the model's learning progression and adaptation to the complexities of the dataset.</p>
+
+<h2>Initial Phase (Epochs 1-5)</h2>
+<p>The training commenced with a relatively high loss, which progressively decreased, indicating the model's initial adaptation and learning from the data. The validation IoU showed a gradual increase, reflecting the model's improving capability in segmenting the images accurately.</p>
+
+<h2>Mid-Training Phase (Epochs 6-15)</h2>
+<p>During this phase, the model's performance demonstrated consistent improvement, with both training and validation losses decreasing. This period marked the model's capability to refine its predictions and capture more subtle features of the dataset. A notable drop in Val Loss and a rise in Val IoU during Epochs 15 and 16 signify a significant leap in the model's validation performance.</p>
+
+<h2>Late Training Phase (Epochs 16-25)</h2>
+<p>The concluding stages of the training showed the model's continued refinement with a general trend of decreasing loss and improving IoU. Epochs 22 to 25 marked the highest validation IoUs, indicating the model's strong performance in generalizing to unseen data. However, a slight increase in validation loss towards the end suggests the possibility of minor overfitting or inconsistencies in the validation dataset.</p>
+
   <h3>Epoch vs Loss Graph:</h3>
-  <Insert Epoch vs Loss Graph & Description Here>
-  
+  <img src="https://github.com/avintech/monuseg-challenge/assets/64296499/e615d651-a3cb-45bd-a13c-987e3fbb1d23">
+<p>Throughout the training epochs, the model demonstrated a steady improvement in its ability to segment images, as evidenced by the decreasing trend in loss and the increasing trend in IoU. The training process revealed the model's capability to learn and adapt to the dataset's intricacies. However, the slight fluctuations in validation metrics towards the end highlight the need for careful observation and potential adjustments in the model or data processing pipeline to ensure robustness and reliability in the model's predictions.</p>
+
   <h2>Validation Phase</h2>
   <h3>Evaluation Results:</h3>
     <ul>
       <li><code>Average IoU on Validation Set: 0.6200</code></li>
-      <li><code>Average Precision: 0.7684</code></li>
-      <li><code>Average Recall: 0.7621</code></li>
-      <li><code>Average F1 Score: 0.7650</code></li>
+      <li><code>Average Precision: 0.7228</code></li>
+      <li><code>Average Recall: 0.8264</code></li>
+      <li><code>Average F1 Score: 0.7712</code></li>
   </ul>
   <h2>Conclusion</h2>
   <p>The evaluation results showcase the effectiveness of the U-Net model in image segmentation tasks. The balanced performance across precision, recall, and IoU underscores the model's capability in identifying and delineating relevant segments accurately, making it a robust tool for image segmentation applications, particularly in medical imaging.</p>
